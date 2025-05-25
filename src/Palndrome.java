@@ -6,8 +6,8 @@ public class Palndrome {
     public static boolean checkIfPalindrome(int inputNum){
         if(inputNum<0)
             throw new InputMismatchException();
-        StringBuffer numString = new StringBuffer(String.valueOf(inputNum));
-        StringBuffer reversedNumString = new StringBuffer(String.valueOf(inputNum)).reverse();
+        StringBuilder numString = new StringBuilder(String.valueOf(inputNum));
+        StringBuilder reversedNumString = new StringBuilder(String.valueOf(inputNum)).reverse();
         return numString.compareTo(reversedNumString) == 0;
     }
 
