@@ -1,3 +1,5 @@
+package com.logic.programs;
+
 import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;

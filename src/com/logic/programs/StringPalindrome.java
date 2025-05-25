@@ -1,4 +1,5 @@
-import java.sql.SQLOutput;
+package com.logic.programs;
+
 import java.util.Scanner;
 
 public class StringPalindrome {
