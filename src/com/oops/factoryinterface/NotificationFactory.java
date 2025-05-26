@@ -17,7 +17,7 @@ public class NotificationFactory {
             case "push":
                 return new PushNotification();
             default:
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Invalid notification type "+notificationType+" not supported");
         }
     }
 
@@ -32,7 +32,7 @@ public class NotificationFactory {
             Notification pushNotification1 = NotificationFactory.createNotification("push1");
             pushNotification1.send();
         }catch(IllegalArgumentException ex){
-            System.out.println("Invalid notification type: " + NotificationFactory.class.getName());
+            System.out.println(ex.getMessage());
         }
 
     }
