@@ -4,22 +4,29 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Palndrome {
-    //function to check for palindrome
-    public static boolean checkIfPalindrome(int inputNum){
-        if(inputNum<0)
-            throw new InputMismatchException();
-        StringBuilder numString = new StringBuilder(String.valueOf(inputNum));
-        StringBuilder reversedNumString = new StringBuilder(String.valueOf(inputNum)).reverse();
-        return numString.compareTo(reversedNumString) == 0;
+    public static boolean isPalindrome(int inputNumber) {
+        String inputNumberString = String.valueOf(inputNumber);
+        String reversedString = "";
+
+        for(int i=inputNumberString.length()-1;i>=0;i--){
+            reversedString+=inputNumberString.charAt(i);
+        }
+        return inputNumberString.equals(reversedString);
     }
 
     public static void main(String[] args) {
-        System.out.print("Enter a number to check if its palindrome: ");
-        try(Scanner sc = new Scanner(System.in)) {
-            int inputNum = sc.nextInt();
-            System.out.printf("%d is %s palindrome",inputNum,checkIfPalindrome(inputNum)?"a":"not a");
-        }catch(InputMismatchException e){
-            System.out.println("Please enter positive numbers only");
+        System.out.print("Please enter a number to check for palindrome : ");
+        try(Scanner scanner = new Scanner(System.in)) {
+            if(!scanner.hasNextInt()) {
+                System.out.print("Invalid input, please enter positive numbers only.");
+                return;
+            }
+            int number = scanner.nextInt();
+            if(number<0){
+                System.out.print("Invalid input, please enter positive numbers only.");
+                return;
+            }
+            System.out.printf("Entered number : %d , is %s palindrome.", number, isPalindrome(number)?"a":"not a");
         }
     }
 }

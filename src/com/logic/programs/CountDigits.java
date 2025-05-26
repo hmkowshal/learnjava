@@ -1,31 +1,33 @@
 package com.logic.programs;
 
-import java.math.BigInteger;
-import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 public class CountDigits {
-    public static BigInteger countDigits(BigInteger inputNumber) {
-        if(inputNumber.compareTo(BigInteger.ZERO)<0) {
-            throw new InputMismatchException();
+
+    public static int countDigits(int inputNumber) {
+
+        int result=0;
+        while(inputNumber!=0){
+            inputNumber=inputNumber/10;
+            result+=1;
         }
-        BigInteger count = BigInteger.ZERO;
-        while(inputNumber.compareTo(BigInteger.ZERO) > 0) {
-            BigInteger[] result = inputNumber.divideAndRemainder(BigInteger.TEN);
-            count = count.add(BigInteger.ONE);
-            inputNumber = result[0];
-        }
-        return count;
+        return result;
     }
 
     public static void main(String[] args) {
-        System.out.print("Enter number to count its digits : ");
-        try(Scanner sc = new Scanner(System.in)) {
-            BigInteger inputNumber = sc.nextBigInteger();
-            BigInteger count = countDigits(inputNumber);
-            System.out.print("Number of digits is : "+count);
-        }catch (InputMismatchException e) {
-            System.out.print("Please enter positive numbers only.");
+        System.out.print("Please enter number to count digits : ");
+        try(Scanner sc=new Scanner(System.in)){
+            if(!sc.hasNextInt()){
+                System.out.println("Invalid input , please enter positive numbers only !");
+                return;
+            }
+            int inputNumber=sc.nextInt();
+            if (inputNumber <0){
+                System.out.println("Invalid input , please enter positive numbers only !");
+                return;
+            }
+            System.out.printf("Number of digits in %d is %d",inputNumber,countDigits(inputNumber));
         }
     }
 }

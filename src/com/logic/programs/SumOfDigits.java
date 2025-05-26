@@ -1,33 +1,39 @@
 package com.logic.programs;
 
-import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SumOfDigits {
-    public static BigInteger sumOfDigits(BigInteger inputNumber){
-        if(inputNumber.compareTo(BigInteger.ZERO) < 0){
+
+    public static long sumOfDigits(long inputNumber) {
+        if (inputNumber < 0) {
             throw new InputMismatchException();
         }
-        BigInteger sum = BigInteger.ZERO;
-        BigInteger quotient = BigInteger.ZERO;
-        BigInteger remainder = BigInteger.ZERO;
-        while(inputNumber.compareTo(BigInteger.ZERO)>0){
-            BigInteger[] digits = inputNumber.divideAndRemainder(BigInteger.TEN);
-            remainder = digits[1];
-            sum = sum.add(remainder);
-            inputNumber = digits[0];
+
+        long sum = 0;
+        while (inputNumber > 0) {
+            sum += inputNumber % 10;
+            inputNumber /= 10;
         }
         return sum;
     }
 
     public static void main(String[] args) {
         System.out.print("Enter number to find sum of digits: ");
-        try(Scanner sc = new Scanner(System.in)){
-            BigInteger inputNumber = sc.nextBigInteger();
-            BigInteger sumOfDigits = sumOfDigits(inputNumber);
-            System.out.print("Sum of digits: " + sumOfDigits);
-        }catch(InputMismatchException e){
+        try (Scanner sc = new Scanner(System.in)) {
+            if (!sc.hasNextLong()) {
+                System.out.println("Please enter a valid positive number.");
+                return;
+            }
+            long inputNumber = sc.nextLong();
+            if (inputNumber < 0) {
+                System.out.println("Please enter positive numbers only.");
+                return;
+            }
+
+            long sum = sumOfDigits(inputNumber);
+            System.out.println("Sum of digits: " + sum);
+        } catch (InputMismatchException e) {
             System.out.println("Please enter positive numbers only.");
         }
     }

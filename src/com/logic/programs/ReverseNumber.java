@@ -1,27 +1,32 @@
 package com.logic.programs;
 
-import java.math.BigInteger;
-import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 public class ReverseNumber {
-    public static BigInteger reverseNum(BigInteger numInput) {
-        if (numInput.compareTo(BigInteger.ZERO) < 0) {
-            throw new InputMismatchException();
+    public static int reverseNumber(int inputNumber) {
+        String inputNumberString = String.valueOf(inputNumber);
+        String reversedString = "";
+
+        for (int i = inputNumberString.length() - 1; i >= 0; i--) {
+            reversedString += inputNumberString.charAt(i);
         }
-        StringBuilder inputNumString = new StringBuilder(numInput.toString());
-        String reverseNumString = inputNumString.reverse().toString();
-        return new BigInteger(reverseNumString);
+        return Integer.parseInt(reversedString);
     }
 
     public static void main(String[] args) {
-        System.out.print("Enter a number to reverse: ");
-        try(Scanner sc = new Scanner(System.in)) {
-            BigInteger numInput = sc.nextBigInteger();
-            BigInteger reverseNum = reverseNum(numInput);
-            System.out.print("Reversed number is : "+reverseNum);
-        }catch(InputMismatchException e) {
-            System.out.println("Please enter positive numbers only.");
+        System.out.print("Please enter a number to reverse : ");
+        try(Scanner scanner = new Scanner(System.in)) {
+            if(!scanner.hasNextInt()) {
+                System.out.print("Invalid input, please enter positive numbers only.");
+                return;
+            }
+            int inputNumber = scanner.nextInt();
+            if(inputNumber < 0) {
+                System.out.print("Invalid input, please enter positive numbers only.");
+                return;
+            }
+            System.out.printf("Reverse of entered number %d is %d.\n", inputNumber, reverseNumber(inputNumber));
         }
     }
 }

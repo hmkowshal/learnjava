@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class StringPalindrome {
     public static boolean isPalindrome(String inputString) {
-        StringBuilder input = new StringBuilder(inputString);
-        String reversed = input.reverse().toString();
-        return inputString.equals(reversed);
+        String reversedString = "";
+
+        for(int i=inputString.length()-1;i>=0;i--){
+            reversedString += inputString.charAt(i);
+        }
+        return inputString.equals(reversedString);
     }
 
     public static void main(String[] args) {
-
-        System.out.print("Please enter a string to check palindrome: ");
-        try(Scanner scanner = new Scanner(System.in)) {
-            String inputString = scanner.next();
-            System.out.printf("Input string : %s is %s palindrome",inputString,isPalindrome(inputString)?"a":"not a");
-        }catch (Exception e) {
-            System.out.println("Please enter string only.");
+        System.out.print("Please enter a string to check for palindrome: ");
+        try(Scanner sc = new Scanner(System.in)) {
+            String inputString = sc.next();
+            System.out.printf("Entered string : %s is %s palindrom", inputString, isPalindrome(inputString)?"a":"not a");
         }
     }
 }

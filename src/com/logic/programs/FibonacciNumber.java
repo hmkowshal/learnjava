@@ -1,42 +1,40 @@
 package com.logic.programs;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FibonacciNumber {
-    //static function to return fibonacci series
-    public static List<Integer> generateFibonacciSeries(int noOfNumbers){
-        List<Integer> result = new ArrayList<>();
-        int a =0;
-        int b =1;
-        result.add(0);
-        if(noOfNumbers<=1)
-            return result;
-        result.add(1);
-        if(noOfNumbers==2)
-            return result;
 
-        for(int i=2;i<noOfNumbers;i++){
-            result.add(a+b);
-            a=result.get(result.size()-2);
-            b=result.get(result.size()-1);
+    public static int[] fibonacciNumber(int number) {
+        if (number <= 0) {
+            return new int[0]; // Return empty array for invalid input
         }
-        return result;
+
+        int[] series = new int[number];
+        series[0] = 0;
+
+        if (number == 1) {
+            return series;
+        }
+
+        series[1] = 1;
+
+        for (int i = 2; i < number; i++) {
+            series[i] = series[i - 1] + series[i - 2];
+        }
+
+        return series;
     }
 
     public static void main(String[] args) {
-        System.out.print("Enter how many fibonacci numbers to generate : ");
-        try(Scanner sc = new Scanner(System.in)){
-            int noOfNumbers = sc.nextInt();
-            List<Integer> result = generateFibonacciSeries(noOfNumbers);
-            System.out.print("Fibonacci series : ");
-            for(Integer num:result){
-                System.out.print(num+" ");
+        System.out.print("Enter number of fibonacci series to be generated : ");
+        try(Scanner sc = new Scanner(System.in)) {
+            if(!sc.hasNextInt()) {
+                System.out.print("Invalid input , please enter a positive number");
+                return;
             }
-        }catch(InputMismatchException ex){
-            System.out.println("Enter positive numbers only.");
+            int n = sc.nextInt();
+            System.out.print("Fibonacci series are: "+Arrays.toString(fibonacciNumber(n)));
         }
     }
 }

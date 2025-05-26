@@ -1,36 +1,40 @@
 package com.logic.programs;
 
-import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ArmStrong {
-    public static boolean isArmStrong(BigInteger inputNumber) {
-        BigInteger originalNumber = inputNumber;
-        if(inputNumber.compareTo(BigInteger.ZERO) < 0){
-            throw new InputMismatchException();
-        }
+    //function to check for n-value armstrong numbers
+    public static boolean isArmStrong(int inputNumber) throws InputMismatchException {
 
-        BigInteger result = BigInteger.ZERO;
-        BigInteger quotient = BigInteger.ZERO;
-        BigInteger remainder = BigInteger.ZERO;
-        while(inputNumber.compareTo(BigInteger.ZERO) > 0) {
-            BigInteger[] divRem = inputNumber.divideAndRemainder(new BigInteger("10"));
-            quotient = divRem[0];
-            remainder = divRem[1];
-            result = result.add(remainder.pow(3));
-            inputNumber = quotient;
+        int originalNumber = inputNumber;
+        int noOfDigits = String.valueOf(inputNumber).length();
+        int result=0;
+
+        while(inputNumber!=0){
+            int remainder = inputNumber % 10;
+            inputNumber = inputNumber / 10;
+            result+=(int)Math.pow(remainder,noOfDigits);
         }
-        return result.equals(originalNumber);
+        return result == originalNumber;
     }
 
+
     public static void main(String[] args) {
-        System.out.print("Enter a number to find if its an armstron number : ");
+        System.out.print("Please enter a number to check if its Armstrong number : ");
         try(Scanner sc = new Scanner(System.in)) {
-            BigInteger inputNumber = sc.nextBigInteger();
-            System.out.printf("Entered number : %s is %s Armstrong Number",inputNumber,isArmStrong(inputNumber)?"a":"not a");
-        }catch (InputMismatchException e){
-            System.out.println("Please enter positive numbers only.");
+            if(!sc.hasNextInt()){
+                System.out.print("Invalid input ! Please enter a valid positive number only.");
+                return;
+            }
+            int inputNumber = sc.nextInt();
+            if(inputNumber<0) {
+                System.out.print("Invalid input ! Please enter a valid positive number only.");
+                return;
+            }
+            System.out.printf("Entered number : %d is %s Armstrong number",inputNumber,isArmStrong(inputNumber)?"an":"not an");
+        }catch(InputMismatchException e){
+            System.out.println("Please enter postive numbers only.");
         }
     }
 }
