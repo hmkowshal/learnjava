@@ -17,17 +17,23 @@ public class NotificationFactory {
             case "push":
                 return new PushNotification();
             default:
-                throw new IllegalArgumentException("Invalid notification type: " + notificationType);
+                throw new IllegalArgumentException();
         }
     }
 
     public static void main(String[] args) {
-        Notification smsNotification = NotificationFactory.createNotification("sms");
-        smsNotification.send();
-        Notification emailNotification = NotificationFactory.createNotification("email");
-        emailNotification.send();
-        Notification pushNotification = NotificationFactory.createNotification("push");
-        pushNotification.send();
+        try {
+            Notification smsNotification = NotificationFactory.createNotification("sms");
+            smsNotification.send();
+            Notification emailNotification = NotificationFactory.createNotification("email");
+            emailNotification.send();
+            Notification pushNotification = NotificationFactory.createNotification("push");
+            pushNotification.send();
+            Notification pushNotification1 = NotificationFactory.createNotification("push1");
+            pushNotification1.send();
+        }catch(IllegalArgumentException ex){
+            System.out.println("Invalid notification type: " + NotificationFactory.class.getName());
+        }
 
     }
 }
